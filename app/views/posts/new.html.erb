@@ -1,0 +1,28 @@
+<h1>Share something awesome!</h1>
+<div class="row-fluid">
+  <div class="span6">
+  <h4>Model backed form</h4>
+    <%= form_for @post, url: {action: "create"} do |f| %>
+      <%= f.label :title, "Post Title" %>
+      <%= f.text_field :title %><br>
+      <%= f.label :url, "URL" %>
+      <%= f.text_field :url %><br>
+      <%= f.label :description, "What's your post about?" %>
+      <%= f.text_area :description, :size => "10x10" %><br>
+      <%= f.submit %>
+    <% end %>
+  </div>
+  <!-- NON MODEL BACKED -->
+  <!-- <div class="span6">
+    <h4>Non model backed form</h4>
+    <%= form_tag("/posts", method: "post") do %>
+      <%= label_tag(:title, "Post Title") %>
+      <%= text_field(:post, :title) %>
+      <%= label_tag(:url, "URL") %>
+      <%= text_field(:post, :url) %>
+      <%= label_tag(:description, "What's your post about?") %>
+      <%= text_area(:post, :description) %><br>
+      <%= submit_tag("Create Post") %>
+    <% end %>
+  </div> -->
+</div>
