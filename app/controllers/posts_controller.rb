@@ -9,11 +9,13 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @post.categorizations.new
+    @select = Category.all.map { |category| [category.cat_name, category.id]}
   end
 
   def create
-    @post = Post.new(params[:post])
     binding.pry
+    @post = Post.new(params[:post])
     if @post.save
       redirect_to @post, :flash => {:success => "You created a new post!"}
     else
