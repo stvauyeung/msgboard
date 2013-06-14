@@ -1,0 +1,14 @@
+<h4>Create your post:</h4>
+    <%= form_for @post do |f| %>
+      <%= f.label :title, "Post Title" %>
+      <%= f.text_field :title %><br>
+      <%= f.label :url, "URL" %>
+      <%= f.text_field :url %><br>
+      <%= f.label :description, "What's your post about?" %>
+      <%= f.text_area :description, :size => "10x10" %><br>
+
+      <%= f.label :category_ids, "Post Category" %>
+      <%= f.select :category_ids, @select, {}, {multiple: 'multiple'} %>
+      <br>
+      <%= f.submit %>
+    <% end %>

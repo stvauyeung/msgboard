@@ -5,6 +5,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = @post.comments[0..-1]
+    @comment = @post.comments.new
   end
 
   def new
@@ -14,18 +16,19 @@ class PostsController < ApplicationController
   end
 
   def create
-    binding.pry
     @post = Post.new(params[:post])
+    @select = Category.all.map { |category| [category.cat_name, category.id]}
     if @post.save
       redirect_to @post, :flash => {:success => "You created a new post!"}
     else
-      flash.now[:error] = "#{@post.errors.full_messages.join('')}"
+      flash.now[:error] = "#{@post.errors.full_messages.join(', ')}"
       render :action => :new
     end
   end
 
   def edit
     @post = Post.find(params[:id])
+    @select = Category.all.map { |category| [category.cat_name, category.id]}
   end
 
   def update

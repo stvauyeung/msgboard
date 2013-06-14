@@ -1,5 +1,13 @@
-<h1><%= @post.title %></h1>
-<%= link_to @post.url %>
+<h1><%= link_to @post.title, @post.url %></h1>
+<p><%= link_to "Edit", edit_post_path %></p>
 <br>
 <p><%= @post.description %></p>
-<p><%= link_to "Edit", "/posts/#{@post.id}/edit" %></p>
+<br>
+<%= render 'comments/form' %>
+<br>
+<% @comments.each do |c| %>
+  <p>
+    <%= c.content %><br>
+    Posted <%= time_ago_in_words(c.created_at) %> ago
+  </p>
+<% end %>

@@ -1,0 +1,9 @@
+<h3>A new comment</h3>
+<div class="row-fluid">
+  <div class="span6">
+    <%= form_for [@post, @comment] do |f| %>
+    <%= f.text_area :content, :rows => 5 %><br>
+    <%= f.submit %>
+    <% end %>
+  </div>
+</div>
