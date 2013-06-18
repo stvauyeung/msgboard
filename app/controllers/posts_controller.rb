@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_filter :require_user, only: [:new, :create, :edit, :update]
+
   def index
     @posts = Post.all
   end
@@ -17,7 +19,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(params[:post])
+    @post.user = current_user
     @select = Category.all.map { |category| [category.cat_name, category.id]}
+    
     if @post.save
       redirect_to @post, :flash => {:success => "You created a new post!"}
     else

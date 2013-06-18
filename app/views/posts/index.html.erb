@@ -1,6 +1,11 @@
-<h5>Latest posts</h5>
-<ul>
+<h1>Latest posts</h1>
+<br>
+<div>
   <% @posts.reverse_each do |post| %>
-  <li><%= link_to "#{post.title}", post %></li>
+  <div class="well">
+    <h3><%= link_to "#{post.title}", post %></h3>
+    <p> Post by <%= post_written_by(post) %> <%= time_ago_in_words(post.created_at) %> ago.
+    </p>
+  </div>
   <% end %>
-</ul>
+</div>

@@ -2,15 +2,22 @@
   <li>
     <%= link_to "LvlRunning", root_path, :class => 'brand' %>
   </li>
-  
-    <% Category.first(5).each do |cat| %>
-      <li>
-        <%= link_to "#{cat.cat_name}", category_path(cat) %>
-      </li>
-    <% end %>
+  <% Category.first(5).each do |cat| %>
+    <li>
+      <%= link_to "#{cat.cat_name}", category_path(cat) %>
+    </li>
+  <% end %>
 </ul>
-<ul class="nav pull-right">
-  <li>
-    <%= link_to 'New Post', '/posts/new' %>
-  </li>
-</ul>
+<div class="nav pull-right">
+  <% if logged_in? %>
+    <div class="btn-group">
+      <%= link_to 'Sign Out', logout_path, :class => "btn" %>
+      <%= link_to 'New Post', new_post_path, :class => "btn" %>
+    </div>
+  <% else %>
+    <div class="btn-group">
+      <%= link_to 'Sign In', login_path, :class => "btn" %>
+      <%= link_to 'Register', register_path, :class => "btn" %>
+    </div>
+  <% end %>
+</div>

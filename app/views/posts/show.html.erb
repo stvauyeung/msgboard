@@ -1,13 +1,19 @@
 <h1><%= link_to @post.title, @post.url %></h1>
-<p><%= link_to "Edit", edit_post_path %></p>
-<br>
-<p><%= @post.description %></p>
-<br>
-<%= render 'comments/form' %>
-<br>
-<% @comments.each do |c| %>
-  <p>
-    <%= c.content %><br>
-    Posted <%= time_ago_in_words(c.created_at) %> ago
-  </p>
+<% if logged_in? %>
+  <p><%= link_to "Edit", edit_post_path %></p>
 <% end %>
+<div class="well">
+  <p><%= @post.description %></p>
+</div>
+<div>
+  <%= render 'comments/form' %>
+</div>
+<br>
+<div>
+  <% @comments.each do |c| %>
+    <div class="well">
+      <p><%= c.content %></p>
+      <p>Posted <%= time_ago_in_words(c.created_at) %> ago by <%= comment_written_by(c) %></p>
+    </div>
+  <% end %>
+</div>
