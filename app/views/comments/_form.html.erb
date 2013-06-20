@@ -1,8 +1,5 @@
-<% if logged_in? %>
   <%= form_for [@post, @comment] do |f| %>
     <%= f.text_area :content, :rows => 3 %><br>
-    <%= f.submit %>
+    <%= f.button 'Add Comment', :class => 'btn' %>
   <% end %>
-<% else %>
-  <%= link_to 'Sign in to comment', login_path, :class => 'btn btn-primary' %>
-<% end %>
+<!-- Should be render 'comments/modal' -->

@@ -1,0 +1,14 @@
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :content, :rows => 3 %><br>
+  <%= link_to 'Add Comment', '#login', :class => 'btn', "data-toggle" => "modal", 'data-target' => '#loginM' %>
+<% end %>
+
+<div id="loginM" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">x</a>
+    <h3 id="myModalLabel">You must login to do that!</h3>
+  </div>
+  <div class="modal-body">
+    <%= render 'users/new' %>
+  </div>
+</div>

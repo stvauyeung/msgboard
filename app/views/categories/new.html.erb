@@ -1,0 +1,6 @@
+<h1>Create a Category</h1>
+<%= form_for @category do |f| %>
+  <%= f.label :cat_name, 'Category Name' %>
+  <%= f.text_field :cat_name %><br>
+  <%= f.submit "Create Category", :class => "btn btn-success" %>
+<% end %>

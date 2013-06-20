@@ -12,5 +12,5 @@ Postit::Application.routes.draw do
     resources :comments, :only => [:new, :create]
   end
 
-  resources :categories
+  resources :categories, :except => [:destroy, :edit, :update]
 end

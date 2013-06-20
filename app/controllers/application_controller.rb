@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
 
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :owner?
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -17,4 +17,16 @@ class ApplicationController < ActionController::Base
       redirect_to login_path
     end
   end
+
+  def owner? #for post view
+    @current_user == Post.find(params[:id]).user
+  end
+
+  def require_owner
+    unless owner?
+      flash[:error] = "You can only edit your own posts!"
+      redirect_to post_path
+    end
+  end
+
 end

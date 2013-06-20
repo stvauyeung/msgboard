@@ -1,12 +1,13 @@
 class PostsController < ApplicationController
   before_filter :require_user, only: [:new, :create, :edit, :update]
+  before_filter :find_post, only: [:show, :edit, :update]
+  before_filter :require_owner, only: [:edit, :update]
 
   def index
     @posts = Post.all
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments[0..-1]
     @comment = @post.comments.new
   end
@@ -31,12 +32,10 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
     @select = Category.all.map { |category| [category.cat_name, category.id]}
   end
 
   def update
-    @post = Post.find(params[:id])
     if @post.update_attributes(params[:post])
       redirect_to @post, :flash => {:success => "You updated '#{@post.title}'!"}
     else
@@ -44,5 +43,11 @@ class PostsController < ApplicationController
       render :action => :edit
     end
   end
+
+  private
+    
+    def find_post
+      @post = Post.find(params[:id])
+    end
   
 end
