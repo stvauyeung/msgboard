@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   helper_method :current_user, :logged_in?, :owner?
+  before_filter :sidebar_objects
   
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -27,6 +28,10 @@ class ApplicationController < ActionController::Base
       flash[:error] = "You can only edit your own posts!"
       redirect_to post_path
     end
+  end
+
+  def sidebar_objects
+    @sbcomments = Comment.find(:all, :order => "id desc", :limit => 5).reverse
   end
 
 end
