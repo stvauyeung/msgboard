@@ -1,0 +1,25 @@
+
+  <div class="well span2 pagination-centered">
+    <% if logged_in? %>
+      <%= link_to '<i class="icon-plus"></i>'.html_safe, vote_post_path(@post.id, value: true), :method => 'post', :remote => true %>
+      <h4 id='<%= "post_#{@post.id}_votes" %>'>
+        <%= @post.total_votes %>
+      </h4>
+      <%= link_to '<i class="icon-minus"></i>'.html_safe, vote_post_path(@post.id, value: false), :method => 'post', :remote => true %>
+    <% else %>
+      <h4 id='<%= "post_#{@post.id}_votes" %>'><%= @post.total_votes %></h4>
+    <% end %>
+  </div>
+  <div class="span10">
+    <div class="row-fluid">
+        <% if owner? %>
+        <%= link_to "Edit", edit_post_path(@post), :class => "btn btn-info btn-mini disabled pull-right" %>
+        <% end %>
+        <h1><%= link_to @post.title, fixed_url(@post.url) %></h1>
+    </div>
+    <div class="row-fluid">
+      <% @post.categories.each do |c| %>
+        <%= link_to c.cat_name, category_path(c.id), :class => "btn btn-mini disabled" %>
+      <% end %>
+    </div>
+  </div>

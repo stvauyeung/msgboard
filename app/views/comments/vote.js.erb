@@ -1,0 +1,1 @@
+$("#comment_<%= params[:id] %>_votes").html(<%= Comment.find(params[:id]).total_votes %>)

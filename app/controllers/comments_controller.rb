@@ -16,4 +16,17 @@ class CommentsController < ApplicationController
       redirect_to @post, :flash => {:alert => "#{@comment.errors.full_messages.join('')}"}
     end
   end
+
+  def vote
+    Vote.create(voteable_id: params[:id], voteable_type: "Comment", value: params[:value])
+
+    respond_to do |format|
+      format.html do
+        flash[:notice] = "Your vote was counted!"
+        redirect_to :back
+      end
+
+      format.js
+    end
+  end
 end

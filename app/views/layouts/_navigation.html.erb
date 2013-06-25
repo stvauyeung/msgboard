@@ -7,13 +7,11 @@
       <%= link_to "#{cat.cat_name}", category_path(cat) %>
     </li>
   <% end %>
+  <% if logged_in? %>
+    <li><%= link_to "+Category", new_category_path %></li>
+  <% end %>
 </ul>
-<% if logged_in? %>
-  <div class="nav">
-    <%= link_to "New Post", new_post_path, :class => "btn btn-success" %>
-    <%= link_to "New Category", new_category_path, :class => "btn btn-info" %>
-  </div>
-<% end %>
+
 <div class="nav pull-right">
   <% if logged_in? %>
     <div class="btn-group">

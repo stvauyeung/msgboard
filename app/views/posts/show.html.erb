@@ -1,19 +1,33 @@
-<h1><%= link_to @post.title, fixed_url(@post.url) %></h1>
-<% if owner? %>
-  <p><%= link_to "Edit", edit_post_path %></p>
-<% end %>
-<div class="well">
-  <p><%= @post.description %></p>
+<div class="row-fluid">
+  <%= render 'show' %>
+</div>
+<div class="row-fluid">
+  <div class="well">
+    <p><%= @post.description %></p>
+    <small> Post <%= time_ago_in_words(@post.created_at) %> ago by <%= post_written_by(@post) %>.
+    </small>
+  </div>
 </div>
 <div>
   <%= render 'comments/form' %>
 </div>
 <br>
-<div>
+<div class="row-fluid">
   <% @comments.each do |c| %>
-    <div class="well">
-      <p><%= c.content %></p>
-      <p>Posted <%= time_ago_in_words(c.created_at) %> ago by <%= comment_written_by(c) %></p>
+    <div class="row-fluid">
+      <div class="well span2 pagination-centered">
+        <% if logged_in? %>
+          <%= link_to '<i class="icon-plus"></i>'.html_safe, vote_post_comment_path(@post, c, :value => true), :method => "post", :remote => true %>
+          <h4 id='<%= "comment_#{c.id}_votes" %>'><%= c.total_votes %></h4>
+          <%= link_to '<i class="icon-minus"></i>'.html_safe, vote_post_comment_path(@post, c, :value => false), :method => "post", :remote => true %>
+        <% else %>
+          <h4 id='<%= "comment_#{c.id}_votes" %>'><%= c.total_votes %></h4>
+        <% end %>
+      </div>
+      <div class="well span10">
+        <p><%= c.content %></p>
+        <small>Posted <%= time_ago_in_words(c.created_at) %> ago by <%= comment_written_by(c) %></small>
+      </div>
     </div>
   <% end %>
 </div>

@@ -1,0 +1,27 @@
+<div class="row-fluid">
+  <div class="well span2 pagination-centered vote">
+    <% if logged_in? %>
+      <%= link_to '<i class="icon-plus"></i>'.html_safe, vote_post_path(post.id, value: true), :method => 'post', :remote => true %>
+      <h4 id='<%= "post_#{post.id}_votes" %>'>
+        <%= post.total_votes %>
+      </h4>
+      <%= link_to '<i class="icon-minus"></i>'.html_safe, vote_post_path(post.id, value: false), :method => 'post', :remote => true %>
+    <% else %>
+      <h4 id='<%= "post_#{post.id}_votes" %>'><%= post.total_votes %></h4>
+    <% end %>
+  </div>
+  <div class="span10">
+    <div class="row-fluid">
+        <h4><%= link_to post.title, fixed_url(post.url) %></h4>
+        <small>Posted <%= time_ago_in_words(post.created_at) %> ago, by <%= post_written_by(post) %></small>
+        <p>
+          <% post.categories.each do |c| %>
+          <%= link_to c.cat_name, category_path(c.id), :class => "btn btn-mini disabled" %>
+          <% end %>
+        </p>
+        <small>
+          <%= link_to "#{post.comments.count} Comments", post_path(post) %>
+        </small>
+    </div>
+  </div>
+</div>

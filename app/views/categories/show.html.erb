@@ -1,11 +1,8 @@
 <h1>Posts on <%= @category.cat_name %></h1>
 <br>
 <div>
-  <% @posts.reverse_each do |post| %>
-  <div class="well">
-    <h3><%= link_to "#{post.title}", post_url(post) %></h3>
-    <p> Post by <%= post_written_by(post) %> <%= time_ago_in_words(post.created_at) %> ago.
-    </p>
-  </div>
+  <% @posts.each do |post| %>
+    <%= render :partial => "posts/post", :object => post %>
+    <hr>
   <% end %>
 </div>

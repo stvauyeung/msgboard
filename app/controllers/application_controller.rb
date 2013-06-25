@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def owner? #for post view
-    @current_user == Post.find(params[:id]).user
+    current_user == Post.find(params[:id]).user
   end
 
   def require_owner
