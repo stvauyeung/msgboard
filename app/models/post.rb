@@ -30,13 +30,13 @@ class Post < ActiveRecord::Base
     #replace all non alphanumeric, underscore or periods with dash
      ret.gsub! /\s*[^A-Za-z0-9\.\-]\s*/, '-'  
 
-     #convert double dash to single
-     ret.gsub! /-+/,"-"
+    #convert double dash to single
+    ret.gsub! /-+/,"-"
 
-     #strip off leading/trailing dash
-     ret.gsub! /\A[-\.]+|[-\.]+\z/,""
+    #strip off leading/trailing dash
+    ret.gsub! /\A[-\.]+|[-\.]+\z/,""
 
-     self.slug = ret
+    self.slug = ret
   end
 
   def to_param
