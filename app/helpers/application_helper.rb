@@ -10,4 +10,8 @@ module ApplicationHelper
   def fixed_url(str)
     str.starts_with?('http://') ? str : "http://#{str}"
   end
+
+  def find_slug(comment)
+    Post.find(comment.user_id).slug
+  end
 end

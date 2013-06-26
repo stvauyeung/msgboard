@@ -1,11 +1,11 @@
 <div class="row-fluid">
   <div class="well span2 pagination-centered vote">
     <% if logged_in? %>
-      <%= link_to '<i class="icon-plus"></i>'.html_safe, vote_post_path(post.id, value: true), :method => 'post', :remote => true %>
+      <%= link_to '<i class="icon-plus"></i>'.html_safe, vote_post_path(post, value: true), :method => 'post', :remote => true %>
       <h4 id='<%= "post_#{post.id}_votes" %>'>
         <%= post.total_votes %>
       </h4>
-      <%= link_to '<i class="icon-minus"></i>'.html_safe, vote_post_path(post.id, value: false), :method => 'post', :remote => true %>
+      <%= link_to '<i class="icon-minus"></i>'.html_safe, vote_post_path(post, value: false), :method => 'post', :remote => true %>
     <% else %>
       <h4 id='<%= "post_#{post.id}_votes" %>'><%= post.total_votes %></h4>
     <% end %>
@@ -16,7 +16,7 @@
         <small>Posted <%= time_ago_in_words(post.created_at) %> ago, by <%= post_written_by(post) %></small>
         <p>
           <% post.categories.each do |c| %>
-          <%= link_to c.cat_name, category_path(c.id), :class => "btn btn-mini disabled" %>
+          <%= link_to c.cat_name, category_path(c), :class => "btn btn-mini disabled" %>
           <% end %>
         </p>
         <small>

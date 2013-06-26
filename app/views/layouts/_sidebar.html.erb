@@ -1,6 +1,6 @@
-<div class="well">
+<div class="well">  
   <h5>Latest Comments</h5>
       <% @sbcomments.each do |c| %>
-        <%= link_to c.content, post_path(c.post_id) %><br>
+        <%= link_to c.content, post_path(find_slug(c)) %><br>
       <% end %>
 </div>

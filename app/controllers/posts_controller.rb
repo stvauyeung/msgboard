@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments[0..-1]
     @comment = @post.comments.new
   end
@@ -61,7 +60,7 @@ class PostsController < ApplicationController
   private
     
     def find_post
-      @post = Post.find(params[:id])
+      @post = Post.find_by_slug(params[:id])
     end
   
 end
